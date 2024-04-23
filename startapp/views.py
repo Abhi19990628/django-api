@@ -3,10 +3,9 @@ from .models import Employess
 from .serializer import EmployessSerializer, UsersSerializer
 from django.contrib.auth.models import User
 from rest_framework import status
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import JsonResponse
-
+from rest_framework.decorators import api_view
 
 @api_view(['GET','POST'])
 def employessListView(request):
@@ -49,9 +48,10 @@ def EmployessDetailsview(request,pk):
         
     
     
-    
+@api_view(['GET'])
 def UserListView(request):
-    Users = User.objects.all() 
-    serializer = UsersSerializer(Users , many=True)
-    return JsonResponse(serializer.data )
+    if request.method == 'GET':
+        Users = User.objects.all() 
+        serializer = UsersSerializer(Users , many=True)
+        return Response(serializer.data)
 
