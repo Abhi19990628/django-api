@@ -40,7 +40,14 @@ def EmployessDetailsview(request,pk):
         return JsonResponse(Serializer.data, safe=False)
     
     elif request.method == 'PUT':
-        pass  
+        jsonData= JSONParser().parse(request)
+        serializer=EmployessSerializer(employess , data=jsonData)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data , safe=False)
+        else:
+            return JsonResponse(serializer.errors , safe=False)
+        
     
     
     
