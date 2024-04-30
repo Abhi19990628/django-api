@@ -55,12 +55,6 @@ def UserListView(request):
         serializer = UsersSerializer(Users , many=True)
         return Response(serializer.data)
 
-api_view(['GET'])
-def UserListView(request):
-    if request.method == 'GET':
-        Users = User.objects.all() 
-        serializer = UsersSerializer(Users , many=True)
-        return Response(serializer.data)
 
 
 
